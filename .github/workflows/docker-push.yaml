@@ -13,8 +13,8 @@ jobs:
      - name: Build docker
        run: |
          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} |
-         docker build -t workshop |
-         docker tag workshop ${{ secrets.DOCKER_USERNAME }}/workshop |
+         docker build -t workshop . |
+         docker tag workshop ${{ secrets.DOCKER_USERNAME }}/workshop|
          docker push ${{ secrets.DOCKER_USERNAME }}/workshop
     
 
