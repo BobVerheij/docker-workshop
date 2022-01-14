@@ -10,11 +10,17 @@ jobs:
     steps: 
      - name: Check out repository
        uses: actions/checkout@v2 
+     - name: Login docker
+       run: |
+         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
      - name: Build docker
        run: |
-         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} |
-         docker build -t workshop . |
-         docker tag workshop ${{ secrets.DOCKER_USERNAME }}/workshop |
+         docker build -t workshop . 
+     - name: Tag image
+       run: |
+         docker tag workshop ${{ secrets.DOCKER_USERNAME }}/workshop
+     - name: Push image
+       run: 
          docker push ${{ secrets.DOCKER_USERNAME }}/workshop
     
 
