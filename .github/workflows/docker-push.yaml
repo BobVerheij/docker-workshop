@@ -10,12 +10,9 @@ jobs:
     steps: 
      - name: Check out repository
        uses: actions/checkout@v2 
-     - uses: actions/docker/login@master
-       with:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
      - name: Build docker
        run: |
+         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} |
          docker build -t bobverheij/workshop |
          docker push bobverheij/workshop
     
